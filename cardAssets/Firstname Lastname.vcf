@@ -1,0 +1,22 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//iPhone OS 16.7.2//EN
+N:Lastname;Firstname;;;
+FN:Firstname Lastname
+ORG:Company;
+item1.EMAIL;type=INTERNET;type=pref:User@example.com
+item1.X-ABLabel:email
+TEL;type=CELL;type=VOICE;type=pref:10000000000
+X-SOCIALPROFILE;type=X;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=facebook:http://www.facebook.com/Username
+X-SOCIALPROFILE;type=Substack;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=Instagram;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=GitHub;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=linkedin:http://www.linkedin.com/in/Username
+X-SOCIALPROFILE;type=TruthSocial;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=Rumble;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=Vimeo;x-user=Username:x-apple:Username
+X-SOCIALPROFILE;type=Reddit;x-user=Username:x-apple:Username
+item2.URL;type=pref:https://example.com
+item2.X-ABLabel:_$!<HomePage>!$_
+END:VCARD

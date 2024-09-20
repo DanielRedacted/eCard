@@ -1,0 +1,45 @@
+BEGIN:VCARD
+VERSION:3.0
+
+
+FN:John Doe
+N:Doe;John;;Mr.;Jr.
+NICKNAME:Johnny
+GENDER:M
+BDAY:1980-02-15
+PHOTO:cardAssets/profile.jpg
+ANNIVERSARY:2005-06-12
+
+ORG:Example Inc.
+TITLE:Chief Executive Officer
+ROLE:CEO
+CATEGORIES:Friend,Colleague
+NOTE:This is a note about John.
+
+ADR;TYPE=home:;;123 Main Street;Los Angeles;CA;90001;USA
+ADR;TYPE=work:;;;;;;
+
+TEL;TYPE=home:+1-123-456-7890
+TEL;TYPE=work:
+
+IMPP:                            # Instant messaging URI (e.g., xmpp:johndoe@chat.example.com)
+
+EMAIL;TYPE=home:user@example.com
+EMAIL;TYPE=work:
+
+URL;TYPE=work:https://www.example.com
+
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/username
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/username
+FBURL:https://www.facebook.com/username
+
+SOURCE:https://www.example.com/contact/johndoe
+
+
+TZ:America/Los_Angeles
+GEO:34.052235;-118.243683
+
+KEY;TYPE=public:MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3+....
+
+REV:2024-01-01T10:00:00Z
+END:VCARD

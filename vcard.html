@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+</head>
+<body>
+  <h1>Contact Information</h1>
+  <div id="contact-container">
+    <!-- Contact information will be inserted here by script.js -->
+  </div>
+
+  <script>
+    // Define the path to the VCF file
+const vcfPath = 'cardAssets/Firstname Lastname.vcf';
+
+// Fetch the VCF file and process it
+fetch(vcfPath)
+  .then(response => response.text())
+  .then(data => {
+    const contactInfo = parseVCF(data);
+    displayContact(contactInfo);
+  })
+  .catch(error => console.error('Error fetching VCF file:', error));
+
+// Function to parse VCF (vCard 3.0) data
+function parseVCF(vcfText) {
+  const lines = vcfText.split('\n');
+  const contactInfo = {};
+
+  lines.forEach(line => {
+    // Ignore empty lines
+    if (line.trim() === '') return;
+
+    // Match VCF fields and extract key-value pairs
+    let [key, value] = line.split(':');
+    if (!value) return; // Ignore malformed lines or BEGIN/END fields
+
+    let fieldType = key.split(';')[0].trim();  // Extract the field type (before any parameters)
+    let fieldParams = key.split(';').slice(1); // Get any additional parameters (e.g., type=CELL)
+    value = value.trim();
+
+    // Process each field and store it with a label
+    switch (fieldType) {
+      case 'FN':
+        contactInfo['Full Name'] = value;
+        break;
+      case 'N':
+        contactInfo['Name'] = value.split(';').filter(Boolean).join(' ');
+        break;
+      case 'ORG':
+        contactInfo['Organization'] = value;
+        break;
+      case 'EMAIL':
+      case 'item1.EMAIL':
+        const emailType = fieldParams.join(', ').replace(/type=/g, '') || 'Email';
+        contactInfo[emailType] = value;
+        break;
+      case 'TEL':
+        const telType = fieldParams.join(', ').replace(/type=/g, '') || 'Phone';
+        contactInfo[telType] = value;
+        break;
+      case 'URL':
+      case 'item2.URL':
+        const urlType = fieldParams.join(', ').replace(/type=/g, '') || 'Website';
+        contactInfo[urlType] = value;
+        break;
+      case 'X-SOCIALPROFILE':
+        const socialType = fieldParams[0].split('=')[1] || 'Social Profile';
+        contactInfo[socialType] = value;
+        break;
+      case 'X-ABLabel':
+        contactInfo['Custom Label'] = value;
+        break;
+      default:
+        // Handle custom fields or unknown fields
+        contactInfo[fieldType] = value;
+        break;
+    }
+  });
+
+  return contactInfo;
+}
+
+// Function to display the contact information on the webpage
+function displayContact(contactInfo) {
+  const container = document.getElementById('contact-container');
+
+  for (const [key, value] of Object.entries(contactInfo)) {
+    if (value) {  // Only show non-empty fields
+      const infoElement = document.createElement('p');
+
+      if (key === 'Photo' || key === 'Logo') {
+        // Handle image fields (Photo/Logo)
+        const imgElement = document.createElement('img');
+        imgElement.src = value;
+        imgElement.alt = `${key}`;
+        imgElement.style.maxWidth = '150px'; // Limit image size
+        container.appendChild(imgElement);
+      } else {
+        infoElement.textContent = `${key}: ${value}`;
+        container.appendChild(infoElement);
+      }
+    }
+  }
+}
+
+
+  </script>
+</body>
+</html>
